@@ -45,11 +45,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// 404 handler
-app.use("*", (req, res) => {
-  res.status(404).json({ success: false, message: "Route not found" });
-});
-
 // Global error handler (production mein crash nahi hoga)
 app.use((err, req, res, next) => {
   console.error(err.stack);
