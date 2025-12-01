@@ -24,7 +24,11 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowed = ["https://www.nodeskdeveloper.com", "https://nodeskdeveloper.com"];
+      const allowed = [
+        "https://www.nodeskdeveloper.com",
+        "https://nodeskdeveloper.com",
+        "http://localhost:3000", // for development
+      ];
       if (!origin || allowed.includes(origin)) {
         callback(null, true);
       } else {
