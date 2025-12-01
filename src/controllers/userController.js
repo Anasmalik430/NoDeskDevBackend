@@ -24,7 +24,7 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Admin emails
-    const adminEmails = ["itsanas474@gmail.com", "anas000mal@gmail.com"];
+    const adminEmails = ["itsanas474@gmail.com", "dtteamworks@gmail.com"];
     const role = adminEmails.includes(email.toLowerCase()) ? "admin" : "user";
 
     // Create user
