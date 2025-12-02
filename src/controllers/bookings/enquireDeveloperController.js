@@ -1,5 +1,4 @@
-// src/controllers/enquireDeveloperController.js
-import EnquireDeveloper from "../models/EnquireDeveloper.js";
+import EnquireDeveloper from "../../models/bookings/EnquireDeveloper.js";
 
 // CREATE Enquiry
 export const createEnquiry = async (req, res) => {
