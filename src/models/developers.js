@@ -62,9 +62,14 @@ const developerSchema = new mongoose.Schema(
       trim: true,
     },
     preferredLanguage: {
-      type: [String],
-      required: [true, "Preferred language is required"],
-      trim: true,
+     type: [String],
+      required: [true, "At least one preferred language is required"],
+      validate: {
+        validator: function (arr) {
+          return arr.length > 0;
+        },
+        message: "preferred language array cannot be empty",
+      },
     },
     available: {
       type: Boolean,
