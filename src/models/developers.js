@@ -62,7 +62,7 @@ const developerSchema = new mongoose.Schema(
       trim: true,
     },
     preferredLanguage: {
-     type: [String],
+      type: [String],
       required: [true, "At least one preferred language is required"],
       validate: {
         validator: function (arr) {
@@ -75,11 +75,25 @@ const developerSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    slug: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt
   }
 );
+
+// Pre-save hook to auto-generate slug from name
+developerSchema.pre('save', function (next) {
+  if (this.isModified('name') || !this.slug) { // Only generate if name changed or slug is missing
+    this.slug = this.name.toLowerCase().trim().replace(/\s+/g, '-');
+  }
+  next();
+});
 
 // Index for faster queries
 developerSchema.index({ skills: 1, level: 1, available: 1 });

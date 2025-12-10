@@ -4,6 +4,7 @@ import {
   deleteDeveloper,
   getAllDevelopers,
   getDeveloperById,
+  getDeveloperBySlug,
   updateDeveloper,
 } from "../controllers/developersController.js";
 
@@ -15,8 +16,11 @@ router.post("/add-developer", addDeveloper);
 // GET - Get all developers
 router.get("/developers", getAllDevelopers);
 
-// GET single developer
+// GET single developer by ID
 router.get("/developer/:id", getDeveloperById);
+
+// GET single developer by slug
+router.get("/developer/slug/:slug", getDeveloperBySlug);
 
 // PUT update developer
 router.put("/developer/:id", updateDeveloper);

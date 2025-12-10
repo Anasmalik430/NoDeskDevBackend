@@ -1,6 +1,6 @@
 import Developer from "../models/developers.js";
 
-// Add new developer
+// Add new developer (slug auto-generated via pre-save hook)
 export const addDeveloper = async (req, res) => {
   try {
     const newDev = await Developer.create(req.body);
@@ -60,21 +60,45 @@ export const getDeveloperById = async (req, res) => {
   }
 };
 
-// Update developer by ID (full or partial update)
-export const updateDeveloper = async (req, res) => {
+// Get single developer by slug
+export const getDeveloperBySlug = async (req, res) => {
   try {
-    const updatedDev = await Developer.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true } // new: true → updated document return karega
-    );
-
-    if (!updatedDev) {
+    const developer = await Developer.findOne({ slug: req.params.slug });
+    if (!developer) {
       return res.status(404).json({
         success: false,
         message: "Developer not found",
       });
     }
+
+    res.status(200).json({
+      success: true,
+      data: developer,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+};
+
+// Update developer by ID (use save() to trigger pre-save hook for slug)
+export const updateDeveloper = async (req, res) => {
+  try {
+    const developer = await Developer.findById(req.params.id);
+    if (!developer) {
+      return res.status(404).json({
+        success: false,
+        message: "Developer not found",
+      });
+    }
+
+    // Update fields
+    Object.assign(developer, req.body);
+
+    // Save to trigger pre-save hook (regenerates slug if name changed)
+    const updatedDev = await developer.save();
 
     res.status(200).json({
       success: true,
