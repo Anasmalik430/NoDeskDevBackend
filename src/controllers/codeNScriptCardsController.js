@@ -1,4 +1,4 @@
-import CodeNScriptCards from "../models/codeNScriptCards.js";
+import CodeNScriptCards from "../models/CodeNScriptCards.js";
 
 // Helper to generate slug from name
 const generateSlug = (name) => {
