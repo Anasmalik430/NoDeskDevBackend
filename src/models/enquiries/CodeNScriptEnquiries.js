@@ -9,6 +9,13 @@ const codeNScriptEnquiriesSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // Client Name
+    clientName: {
+      type: String,
+      required: [true, "Client name is required"],
+      trim: true,
+    },
+
     // Images Array
     images: {
       type: [String],
@@ -143,7 +150,7 @@ const codeNScriptEnquiriesSchema = new mongoose.Schema(
       default: "",
     },
     // Status
-     status: {
+    status: {
       type: String,
       default: "Pending",
       enum: ["Pending", "Scheduled", "Completed", "Cancelled"],
@@ -185,6 +192,9 @@ codeNScriptEnquiriesSchema.index({ codeLanguages: 1 });
 codeNScriptEnquiriesSchema.index({ createdAt: -1 });
 
 // Create and export the model
-const CodeNScriptEnquiries = mongoose.model( "CodeNScriptEnquiries", codeNScriptEnquiriesSchema );
+const CodeNScriptEnquiries = mongoose.model(
+  "CodeNScriptEnquiries",
+  codeNScriptEnquiriesSchema
+);
 
 export default CodeNScriptEnquiries;

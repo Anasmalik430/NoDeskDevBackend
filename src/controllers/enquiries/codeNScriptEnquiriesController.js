@@ -92,6 +92,7 @@ export const updateEnquiryById = async (req, res) => {
     const allowedUpdates = [
       "status",
       "name",
+      "clientName",
       "images",
       "basePrice",
       "installation",
