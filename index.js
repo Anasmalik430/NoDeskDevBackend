@@ -40,8 +40,9 @@ app.use(
   cors({
     origin: (origin, callback) => {
       const allowed = [
-        "https://www.nodeskdeveloper.com",
-        "https://nodeskdeveloper.com",
+        "https://www.nodeskdeveloper.in",
+        "https://nodeskdeveloper.in",
+        "https://nodeskdeveloper.vercel.app",
         "http://localhost:3000", // for development
       ];
       if (!origin || allowed.includes(origin)) {
